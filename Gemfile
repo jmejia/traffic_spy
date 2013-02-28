@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
+  gem 'sqlite3'
   gem 'shotgun'
   gem 'rspec'
   gem 'guard-rspec'
