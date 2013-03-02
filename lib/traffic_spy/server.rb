@@ -12,26 +12,19 @@ module TrafficSpy
       erb 'sources/new'.to_sym
     end
 
-    post '/sources/' do
-      # redirect to('/')
-      # 1) create a source instance
+    post '/sources' do
       source = Source.new(params)
-      source.save
-      redirect to('/')
-
-      # 2) save it
-      #if source.valid?
-      #  source.save
-      #  status 200
-      #elsif source.nonunique?
-      #  status 403
-      #else
-      #  status 400
-      #end
-      # 3a) if the request contains the required parameters and is unique, then return 200OK
-      # 3b) if it contains the required parameters, but isn't unique then return 403
-      # 3c) otherwise return 400 Bad request
-      
+      if source.exists?
+        status 403
+        body "Identifier already exists."
+      elsif source.valid?
+        source.save
+        status 200
+        body "{\"identifier\":\"#{source.identifier}\"}"
+      else
+        status 400
+        body "Missing required parameters."
+      end
     end
 
     not_found do

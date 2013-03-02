@@ -10,11 +10,23 @@ module TrafficSpy
     end
 
     def valid?
+      true unless missing_attributes?
+    end
 
+    def missing_attributes?
+      [identifier, root_url].include?("")
+    end
+
+    def exists?
+      sources_table.where(:identifier => identifier).to_a.count > 0
+    end
+
+    def sources_table
+      DB.from(:sources)
     end
 
     def save
-      DB.from(:sources).insert(:identifier => identifier, :root_url => root_url)
+      sources_table.insert(:identifier => identifier, :root_url => root_url)
     end
   end
 end
