@@ -25,7 +25,6 @@ module TrafficSpy
 
       if source.exists?
         status 403
-        body "Identifier already exists."
       elsif source.valid?
         source.save
         status 200
