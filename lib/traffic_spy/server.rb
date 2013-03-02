@@ -12,27 +12,27 @@ module TrafficSpy
       erb 'sources/new'.to_sym
     end
 
-    post '/sources/' do
-      # redirect to('/')
-      # 1) create a source instance
-      source = Source.new(params)
-      source.save
-      redirect to('/')
+    get '/sources/:identifier' do
+      @source = Source.find_by_identifier(params[:identifier])
+      erb 'sources/show'.to_sym
+    end
 
-      # 2) save it
-      # if source.valid?
-      #   source.save
-      #   status 200
-      # elsif source.nonunique?
-      #   status 403
-      # else
-      #   status 400
-      # end
+    post '/sources' do
+      clean_hash = { :identifier => params[:identifier],
+                     :root_url   => params[:rootUrl]
+                   }
+      source = Source.new(clean_hash)
 
-      # 3a) if the request contains the required parameters and is unique, then return 200OK
-      # 3b) if it contains the required parameters, but isn't unique then return 403
-      # 3c) otherwise return 400 Bad request
-      
+      if source.exists?
+        status 403
+      elsif source.valid?
+        source.save
+        status 200
+        body "{\"identifier\":\"#{source.identifier}\"}"
+      else
+        status 400
+        body "Missing required parameters."
+      end
     end
 
     not_found do
