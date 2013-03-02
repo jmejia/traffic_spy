@@ -1,3 +1,21 @@
-<h1>Hello <%= @source.identifier.capitalize %></h1>
-
-<%= @source.root_url %>
+<html> 
+  <head>
+    <title> For <%= @source.identifier %>URL </title>
+  </head>
+  <body>
+    <h1>Most requested URLs for <%= @source.identifier %></h1>
+      #most to least requested urls(takes in url)
+    <h3>Web browser breakdown across all requests</h3>
+      #shows which request used which browser(take in userAgent)
+    <h3>OS breakdown across all requests</h3>
+      #takes in OS types for all requests(takes in userAgent)
+    <h3>Screen Resolution across all requests</h3>
+      #takes in resolution data(heightxwidth) from all requests
+    <h3>Longest, average response time per URL to shortest, average response time per URL</h3>
+      #displays longest to shortest average response time per URL
+    <h3>Hyperlinks of each URL</h3>
+      #Displays hyperlinks of each url to view url specific data
+    <h3>Hyperlink to view event data</h3>
+      #Displays hyperlink to view aggregate event data
+  </body>
+</html>
