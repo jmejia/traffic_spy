@@ -12,8 +12,17 @@ module TrafficSpy
       erb 'sources/new'.to_sym
     end
 
+    get '/sources/:identifier' do
+      @source = Source.find_by_identifier(params[:identifier])
+      erb 'sources/show'.to_sym
+    end
+
     post '/sources' do
-      source = Source.new(params)
+      clean_hash = { :identifier => params[:identifier],
+                     :root_url   => params[:rootUrl]
+                   }
+      source = Source.new(clean_hash)
+
       if source.exists?
         status 403
         body "Identifier already exists."

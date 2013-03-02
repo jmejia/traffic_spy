@@ -6,7 +6,7 @@ module TrafficSpy
     def initialize(input)
       @id = input[:id]
       @identifier = input[:identifier]
-      @root_url = input[:rootUrl]
+      @root_url = input[:root_url]
     end
 
     def valid?
@@ -27,6 +27,11 @@ module TrafficSpy
 
     def save
       sources_table.insert(:identifier => identifier, :root_url => root_url)
+    end
+
+    def self.find_by_identifier(param)
+      source = DB.from(:sources).where(:identifier => param).to_a.first
+      new(source)
     end
   end
 end
