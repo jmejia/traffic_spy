@@ -30,14 +30,14 @@ module TrafficSpy
       Source.table.insert(:identifier => identifier, :root_url => root_url)
     end
 
-    #def self.find_by_identifier(param)
-    #  source = table.where(:identifier => param).to_a.first
-    #  new(source)
-    #end
+    def self.find_by_identifier(param)
+     source = table.where(:identifier => param).to_a.first
+     new(source)
+    end
 
-    #def self.find_by_identifier(val)
-    #  find_by_attribute("identifier", val)
-    #end
+    def self.find_by_identifier(val)
+     find_by_attribute("identifier", val)
+    end
 
     ["identifier"].each do |attr|
       define_singleton_method("find_by_#{attr}") do |val|

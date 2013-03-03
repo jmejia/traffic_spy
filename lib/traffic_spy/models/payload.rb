@@ -22,14 +22,14 @@ module TrafficSpy
     def save(identifier, payload)
       Payload.table.insert(
         :url => url,
-        :requested_at => requested_at
-        :responded_in => responded_in
-        :referred_by => referred_by
-        :request_type => request_type
-        :paramters => parameters
-        :event_name => event_name
-        :user_agent => user_agent
-        :resolution_width => resolution_width
+        :requested_at      => requested_at
+        :responded_in      => responded_in
+        :referred_by       => referred_by
+        :request_type      => request_type
+        :paramters         => parameters
+        :event_name        => event_name
+        :user_agent        => user_agent
+        :resolution_width  => resolution_width
         :resolution_height => resolution_height
         )
       end
