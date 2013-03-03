@@ -3,19 +3,19 @@
     <title> For <%= @source.identifier %>URL </title>
   </head>
   <body>
-    <h1>Most requested URLs</h>
+    <h1>Most requested URLs for <%= @source.identifier %></h1>
       #most to least requested urls(takes in url)
-    <h2>Web browser breakdown across all requests</h>
+    <h3>Web browser breakdown across all requests</h3>
       #shows which request used which browser(take in userAgent)
     <h3>OS breakdown across all requests</h3>
       #takes in OS types for all requests(takes in userAgent)
-    <h4>Screen Resolution across all requests</h4>
+    <h3>Screen Resolution across all requests</h3>
       #takes in resolution data(heightxwidth) from all requests
-    <h5>Longest, average response time per URL to shortest, average response time per URL</h5>
+    <h3>Longest, average response time per URL to shortest, average response time per URL</h3>
       #displays longest to shortest average response time per URL
-    <h6>Hyperlinks of each URL</h6>
+    <h3>Hyperlinks of each URL</h3>
       #Displays hyperlinks of each url to view url specific data
-    <h7>Hyperlink to view event data</h7>
+    <h3>Hyperlink to view event data</h3>
       #Displays hyperlink to view aggregate event data
   </body>
 </html>
