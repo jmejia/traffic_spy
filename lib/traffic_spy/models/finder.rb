@@ -1,9 +1,9 @@
 module TrafficSpy
-  module Finder
+  module Search
 
     def find_by_attribute(attr, val)
-      klass = name.split("::").last
       klass = table.where(attr.to_sym => val).to_a.first
+      puts klass.inspect
       new(klass)
     end
 
