@@ -21,6 +21,7 @@ module TrafficSpy
 
     def save(identifier, payload)
       Payload.table.insert(
+<<<<<<< HEAD
         :url => url,
         :requested_at      => requested_at
         :responded_in      => responded_in
@@ -31,6 +32,19 @@ module TrafficSpy
         :user_agent        => user_agent
         :resolution_width  => resolution_width
         :resolution_height => resolution_height
+=======
+        :source => Source.find_by_identifier(:identifier),
+        :url => Url.search_or_create(payload[:url])
+        #:requested_at => requested_at,
+        #:responded_in => responded_in,
+        #:referred_by => referred_by,
+        #:request_type => request_type,
+        #:paramters => parameters,
+        #:event_name => event_name,
+        #:user_agent => user_agent,
+        #:resolution_width => resolution_width,
+        #:resolution_height => resolution_height
+>>>>>>> 623b575b78919c13fc0c34c98d66ed54c39a36fd
         )
       end
     end
