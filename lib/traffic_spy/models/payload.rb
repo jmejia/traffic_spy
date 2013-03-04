@@ -20,6 +20,10 @@ module TrafficSpy
 
     def self.save(identifier, params)
       source_id = Source.find_by_identifier(identifier).id
+      user_agent = UserAgent.parse(params["userAgent"])
+      width = params["resolutionWidth"]
+      height = params["resolutionHeight"]
+
       Payload.table.insert(
         :url_id => Url.find_or_save("url", params["url"]),
         :source_id => source_id,
@@ -28,11 +32,12 @@ module TrafficSpy
         :referrer_id => Referrer.find_or_save("url", params["referredBy"]),
         :request_type => params["requestType"],
         :event_id => Event.find_or_save("name", params["eventName"], source_id),
-        :user_agent => user_agent
+        :browser => user_agent.browser,
+        :os => user_agent.os,
+        :resolution => "#{width}x#{height}",
+        :ip => params["ip"],
+        :created_at => Time.now
       )
-        #:resolution_width => resolution_width,
-        #:resolution_height => resolution_height
-        #)
     end
 
   end

@@ -9,11 +9,11 @@ Sequel.migration do
       foreign_key :referrer_id
       String      :request_type
       foreign_key :event_id
-      foreign_key :user_agent_id
+      String      :browser
+      String      :os
       String      :resolution
-      foreign_key :ip_id
+      String      :ip
       DateTime    :created_at
-      DateTime    :updated_at
     end
   end
 end
