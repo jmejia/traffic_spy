@@ -1,3 +1,4 @@
+require 'json'
 module TrafficSpy
 
   class Server < Sinatra::Base
@@ -17,11 +18,15 @@ module TrafficSpy
       erb 'sources/show'.to_sym
     end
 
+    post '/sources/:identifier/data' do
+      data = JSON.parse(params[:payload])
+      Payload.save(params[:identifier], data)
+      status 200
+    end
+
     post '/sources' do
-      clean_hash = { :identifier => params[:identifier],
-                     :root_url   => params[:rootUrl]
-                   }
-      source = Source.new(clean_hash)
+      clean_params = Source.clean(params)
+      source = Source.new(clean_params)
 
       if source.exists?
         status 403
