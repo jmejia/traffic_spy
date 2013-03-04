@@ -10,7 +10,7 @@ Sequel.migration do
       String      :request_type
       foreign_key :event_id
       foreign_key :user_agent_id
-      foreign_key :resolution_id
+      String      :resolution
       foreign_key :ip_id
       DateTime    :created_at
       DateTime    :updated_at

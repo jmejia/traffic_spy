@@ -27,9 +27,9 @@ module TrafficSpy
         :responded_in => params["respondedIn"],
         :referrer_id => Referrer.find_or_save("url", params["referredBy"]),
         :request_type => params["requestType"],
-        #:event_id => Event.find_or_save("name", params["eventName"], source_id)
+        :event_id => Event.find_or_save("name", params["eventName"], source_id),
+        :user_agent => user_agent
       )
-        #:user_agent => user_agent,
         #:resolution_width => resolution_width,
         #:resolution_height => resolution_height
         #)

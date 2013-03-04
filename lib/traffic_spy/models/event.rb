@@ -11,18 +11,23 @@ module TrafficSpy
       @received_count = input[:received_count]
     end
 
+    def update_received_count
+      count = received_count + 1
+      Event.table.where(:id => id).update(:received_count => count)
+    end
+
     def self.save(name, source_id)
-      Url.table.insert(:name => name, :source_id => source_id, :received_count => 1)
+      table.insert(:name => name, :source_id => source_id, :received_count => 1)
     end
 
     def self.searchables
       @_searchables = ["id", "name", "source_id", "received_count"]
     end
 
-    def find_or_save(attr, val, source_id)
+    def self.find_or_save(attr, val, source_id)
       if exists?(attr, val)
         event = find_by_attribute(attr, val)
-        # update existing count
+        event.update_received_count
         event.id
       else
         save(val, source_id)
