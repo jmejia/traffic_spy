@@ -1,5 +1,5 @@
 module TrafficSpy
-  class Url
+  class Referrer
 
     attr_reader :id, :url
     extend Finder
@@ -10,7 +10,7 @@ module TrafficSpy
     end
 
     def self.save(url)
-      Url.table.insert(:url => url)
+      table.insert(:url => url)
     end
 
     def self.searchables

@@ -2,9 +2,7 @@ module TrafficSpy
   class Source
 
     attr_reader :id, :identifier, :root_url
-    extend Search
-
-    SEARCHABLES = ["identifier"]
+    extend Finder
 
     def initialize(input)
       @id = input[:id]
@@ -28,8 +26,11 @@ module TrafficSpy
       Source.table.insert(:identifier => identifier, :root_url => root_url)
     end
 
-    def self.table
-      DB.from(:sources)
+    def self.clean(params)
+      {
+        :identifier => params[:identifier],
+        :root_url   => params[:rootUrl]
+      }
     end
 
     def self.searchables

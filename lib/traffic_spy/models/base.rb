@@ -17,5 +17,9 @@ end
 # require 'traffic_spy/models/request'
 require "traffic_spy/models/finder"
 require "traffic_spy/models/source"
+require "traffic_spy/models/payload"
+require "traffic_spy/models/url"
+require "traffic_spy/models/referrer"
+require "traffic_spy/models/event"
 
 # require 'traffic_spy/models/source'
