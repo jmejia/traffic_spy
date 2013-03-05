@@ -1,17 +1,21 @@
 module TrafficSpy
   class Payload
+
+    extend Finder
+    attr_reader :url_id, :os, :browser, :resolution, :responded_in, :url
+
     def initialize(input)
-      @payload           = input[:payload]
       @url_id            = input[:url_id]
+      @source_id         = input[:source_id]
       @requested_at      = input[:requested_at]
       @responded_in      = input[:responded_in]
       @referrer_id       = input[:referred_by]
       @request_type      = input[:request_type]
       @parameters        = input[:parameters]
       @event_name        = input[:event_name]
-      @user_agent        = input[:user_agent]
-      @resolution_width  = input[:resolution_width]
-      @resolution_height = input[:resolution_height]
+      @os                = input[:os]
+      @browser           = input[:browser]
+      @resolution        = input[:resolution]
     end
 
     def self.table
@@ -38,6 +42,10 @@ module TrafficSpy
         :ip => params["ip"],
         :created_at => Time.now
       )
+    end
+
+    def url
+      @url = Url.find_by_attribute("id", url_id)
     end
 
   end

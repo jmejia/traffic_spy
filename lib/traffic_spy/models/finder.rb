@@ -6,6 +6,11 @@ module TrafficSpy
       new(match)
     end
 
+    def find_all_by_attribute(attr, val)
+      matches = table.where(attr.to_sym => val).to_a
+      matches.collect { |match| new(match) }
+    end
+
     def find_or_save(attr, val)
       if exists?(attr, val)
         find_by_attribute(attr, val).id
