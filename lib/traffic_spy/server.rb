@@ -3,6 +3,7 @@ module TrafficSpy
 
   class Server < Sinatra::Base
     set :views, 'lib/views'
+    set :public_folder, 'lib/public'
 
     get '/' do
       erb :index
@@ -14,6 +15,14 @@ module TrafficSpy
 
     get '/sources/:identifier' do
       @source = Source.find_by_identifier(params[:identifier])
+      @payloads = Payload.find_all_by_attribute("source_id", @source.id)
+      url_ids = @payloads.group_by { |pload| pload.url_id }.map { |key,val| key }
+
+      urls = url_ids.collect do |url_id|
+        Url.find_by_attribute("id", url_id)
+      end
+
+      @urls = urls.sort_by { |url| -url.requests }
       erb 'sources/show'.to_sym
     end
 

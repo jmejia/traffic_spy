@@ -1,21 +1,51 @@
-<html> 
-  <head>
-    <title> For <%= @source.identifier %>URL </title>
-  </head>
-  <body>
-    <h1>Most requested URLs for <%= @source.identifier %></h1>
-      #most to least requested urls(takes in url)
-    <h3>Web browser breakdown across all requests</h3>
-      #shows which request used which browser(take in userAgent)
-    <h3>OS breakdown across all requests</h3>
-      #takes in OS types for all requests(takes in userAgent)
-    <h3>Screen Resolution across all requests</h3>
-      #takes in resolution data(heightxwidth) from all requests
-    <h3>Longest, average response time per URL to shortest, average response time per URL</h3>
-      #displays longest to shortest average response time per URL
-    <h3>Hyperlinks of each URL</h3>
-      #Displays hyperlinks of each url to view url specific data
-    <h3>Hyperlink to view event data</h3>
-      #Displays hyperlink to view aggregate event data
-  </body>
-</html>
+<h2><%= @source.identifier.capitalize %> Stats</h2>
+<h3>URL Breakdown</h3>
+<table class="table">
+  <tr>
+    <th>URL</th>
+    <th>Requests</th>
+    <th>Avg. Response Time</th>
+  </tr>
+  <% @urls.each do |url| %>
+    <tr>
+      <td><%= url.url %></td>
+      <td><%= url.requests %></td>
+      <td>###</td>
+    </tr>
+  <%end%>
+</table>
+
+*most to least requested urls(takes in url)
+
+<h3>Request Breakdown</h3>
+<table class="table">
+  <tr>
+    <th>URL</th>
+    <th>Operating System</th>
+    <th>Browser</th>
+    <th>Screen Res.</th>
+    <th>Response Time</th>
+  </tr>
+  <% @payloads.each do |payload| %>
+    <tr>
+      <td><%= payload.url.url %></td>
+      <td><%= payload.os %></td>
+      <td><%= payload.browser %></td>
+      <td><%= payload.resolution %></td>
+      <td><%= payload.responded_in %></td>
+    </tr>
+  <% end %>
+</table>
+
+*Web browser breakdown across all requests
+  #shows which request used which browser(take in userAgent)
+<h3>OS breakdown across all requests</h3>
+  #takes in OS types for all requests(takes in userAgent)
+<h3>Screen Resolution across all requests</h3>
+  #takes in resolution data(heightxwidth) from all requests
+<h3>Longest, average response time per URL to shortest, average response time per URL</h3>
+  #displays longest to shortest average response time per URL
+<h3>Hyperlinks of each URL</h3>
+  #Displays hyperlinks of each url to view url specific data
+<h3>Hyperlink to view event data</h3>
+  #Displays hyperlink to view aggregate event data

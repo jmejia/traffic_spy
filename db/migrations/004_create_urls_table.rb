@@ -3,6 +3,7 @@ Sequel.migration do
     create_table :urls do
       primary_key :id
       String      :url
+      integer     :requests
     end
   end
 end
