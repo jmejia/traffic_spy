@@ -4,7 +4,6 @@ module TrafficSpy
   class Server < Sinatra::Base
     set :views, 'lib/views'
 
-
     get '/' do
       erb :index
     end
