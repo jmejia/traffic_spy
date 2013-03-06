@@ -10,6 +10,7 @@ group :development do
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9'
   gem 'rb-readline'
+  gem 'simplecov'
 end
 
 group :evaluations do

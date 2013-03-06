@@ -20,7 +20,7 @@ module TrafficSpy
 
       urls = url_ids.collect do |url_id|
         Url.find_by_attribute("id", url_id)
-      end
+      end 
 
       @urls = urls.sort_by { |url| -url.requests }
       erb 'sources/show'.to_sym

@@ -33,5 +33,10 @@ module TrafficSpy
     end
 
 
+    it 'should return nil if record does not exist' do
+      described_class.find_by_identifier('asdfasdf').should be_nil
+    end
+
+
   end
 end

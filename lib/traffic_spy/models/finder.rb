@@ -3,7 +3,7 @@ module TrafficSpy
 
     def find_by_attribute(attr, val)
       match = table.where(attr.to_sym => val).to_a.first
-      new(match)
+      match && new(match)
     end
 
     def find_all_by_attribute(attr, val)
