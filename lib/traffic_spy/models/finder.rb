@@ -11,6 +11,16 @@ module TrafficSpy
       matches.collect { |match| new(match) }
     end
 
+    #def find_all_by_attribute(attr, val)
+    #  matches = table.where(attr.to_sym => val).to_a
+    #  matches.collect { |match| new(match) }
+    #end
+
+    def find_all_by_attribute(attr, val, options={})
+      matches = table.where(attr.to_sym => val).order(options[:order] || :id)
+      matches.to_a.collect { |match| new(match) }
+    end
+
     def find_or_save(attr, val)
       if exists?(attr, val)
         find_by_attribute(attr, val).id

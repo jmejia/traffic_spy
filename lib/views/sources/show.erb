@@ -1,9 +1,14 @@
 <h2><%= @source.identifier.capitalize %> Stats</h2>
+<<<<<<< HEAD
 <h3>URL Breakdown</h3>
+=======
+<h3>URLs By Requests</h3>
+>>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
 <table class="table">
   <tr>
     <th>URL</th>
     <th>Requests</th>
+<<<<<<< HEAD
     <th>Avg. Response Time</th>
   </tr>
   <% @urls.each do |url| %>
@@ -11,13 +16,38 @@
       <td><%= url.url %></td>
       <td><%= url.requests %></td>
       <td>###</td>
+=======
+  </tr>
+  <% @requested_urls.each do |url| %>
+    <tr>
+      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><%= url.requests %></td>
+>>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
     </tr>
   <%end%>
 </table>
 
+<<<<<<< HEAD
 *most to least requested urls(takes in url)
 
 <h3>Request Breakdown</h3>
+=======
+<h3>URLs By Average Response Time</h3>
+<table class="table">
+  <tr>
+    <th>URL</th>
+    <th>Requests</th>
+  </tr>
+  <% @response_urls.each do |url| %>
+    <tr>
+      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><%= url.avg_response_time %></td>
+    </tr>
+  <%end%>
+</table>
+
+<h3>All Requests</h3>
+>>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
 <table class="table">
   <tr>
     <th>URL</th>
@@ -25,14 +55,23 @@
     <th>Browser</th>
     <th>Screen Res.</th>
     <th>Response Time</th>
+<<<<<<< HEAD
   </tr>
   <% @payloads.each do |payload| %>
     <tr>
       <td><%= payload.url.url %></td>
+=======
+    <th>Event</th>
+  </tr>
+  <% @payloads.each do |payload| %>
+    <tr>
+      <td><a href="urls/<%= payload.url.path %>"><%= payload.url.path%></a></td>
+>>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
       <td><%= payload.os %></td>
       <td><%= payload.browser %></td>
       <td><%= payload.resolution %></td>
       <td><%= payload.responded_in %></td>
+<<<<<<< HEAD
     </tr>
   <% end %>
 </table>
@@ -49,3 +88,9 @@
   #Displays hyperlinks of each url to view url specific data
 <h3>Hyperlink to view event data</h3>
   #Displays hyperlink to view aggregate event data
+=======
+      <td><%= payload.event.name %></td>
+    </tr>
+  <% end %>
+</table>
+>>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
