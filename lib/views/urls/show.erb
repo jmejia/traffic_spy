@@ -1,0 +1,22 @@
+<h2><%= @source.identifier.capitalize %> URL Statistics</h2>
+<h4>Request Breakdown: <%= @url.path %></h4>
+<table class="table">
+  <tr>
+    <th>URL</th>
+    <th>Operating System</th>
+    <th>Browser</th>
+    <th>Screen Res.</th>
+    <th>Response Time</th>
+    <th>Event</th>
+  </tr>
+  <% @payloads.each do |payload| %>
+    <tr>
+      <td><%= payload.url.path%></td>
+      <td><%= payload.os %></td>
+      <td><%= payload.browser %></td>
+      <td><%= payload.resolution %></td>
+      <td><%= payload.responded_in %></td>
+      <td><%= payload.event.name %></td>
+    </tr>
+  <% end %>
+</table>

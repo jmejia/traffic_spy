@@ -13,23 +13,48 @@ module TrafficSpy
       erb 'sources/new'.to_sym
     end
 
-    get '/sources/:identifier' do
-      @source = Source.find_by_identifier(params[:identifier])
-      @payloads = Payload.find_all_by_attribute("source_id", @source.id)
-      url_ids = @payloads.group_by { |pload| pload.url_id }.map { |key,val| key }
+    get '/sources/:identifier/?' do
+      identifier = params[:identifier]
+      if Source.exists?("identifier", identifier)
+        @source = Source.find_by_identifier(identifier)
+        @payloads = @source.payloads.reverse
+        urls = @source.urls
+        @requested_urls = urls.sort_by { |url| -url.requests }
+        @response_urls = urls.sort_by { |url| -url.avg_response_time }
 
-      urls = url_ids.collect do |url_id|
-        Url.find_by_attribute("id", url_id)
+        erb 'sources/show'.to_sym
+      else
+        body "Identifier does not exist"
       end
+    end
 
-      @urls = urls.sort_by { |url| -url.requests }
-      erb 'sources/show'.to_sym
+    get '/sources/:identifier/urls/*/?' do
+      identifier = params[:identifier]
+      path = params[:splat]
+      if Source.exists?("identifier", identifier)
+        @source = Source.find_by_identifier(identifier)
+        full_url = "#{@source.root_url}/#{path[0]}"
+        if Url.exists?("full_url", full_url)
+          @url = Url.find_by_attribute("full_url", full_url)
+          @payloads = @url.payloads.reverse
+          erb 'urls/show'.to_sym
+        else
+          body "This URL has not been requested"
+        end
+      else
+        body "Whoa, buddy... That's **NOT** a valid Identifier"
+      end
     end
 
     post '/sources/:identifier/data' do
-      data = JSON.parse(params[:payload])
-      Payload.save(params[:identifier], data)
-      status 200
+      if Source.exists?("identifier", params[:identifier])
+        data = JSON.parse(params[:payload])
+        Payload.save(params[:identifier], data)
+        status 200
+      else
+        body "Identifier does not exist"
+        status 400
+      end
     end
 
     post '/sources' do

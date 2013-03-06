@@ -10,6 +10,7 @@ module TrafficSpy
 end
 
 require 'useragent'
+require 'uri'
 
 require 'traffic_spy/models/finder'
 require 'traffic_spy/models/source'
