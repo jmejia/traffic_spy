@@ -22,7 +22,7 @@
   </tr>
   <% @response_urls.each do |url| %>
     <tr>
-      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>">/<%= url.path%></a></td>
       <td><%= url.avg_response_time %></td>
     </tr>
   <%end%>
@@ -31,6 +31,16 @@
 <h3>Browser Breakdown</h3>
 <% @browsers.each do |browser, payloads| %>
   <h5><%=browser%>: <%=payloads.count%></h5>
+<% end %>
+
+<h3>Operating System Breakdown</h3>
+<% @o_systems.each do |os, payloads| %>
+  <h5><%=os%>: <%=payloads.count%></h5>
+<% end %>
+
+<h3>Screen Resolution Breakdown</h3>
+<% @resolutions.each do |resolution, payloads| %>
+  <h5><%=resolution%>: <%=payloads.count%></h5>
 <% end %>
 
 <h3>All Requests</h3>
@@ -45,7 +55,7 @@
   <% @payloads.each do |payload| %>
     <tr>
 
-      <td><a href="<%= @source.identifier %>/urls/<%= payload.url.path %>"><%= payload.url.path %></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= payload.url.path %>">/<%= payload.url.path %></a></td>
       <td><%= payload.os %></td>
       <td><%= payload.browser %></td>
       <td><%= payload.resolution %></td>

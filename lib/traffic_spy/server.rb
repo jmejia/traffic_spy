@@ -22,6 +22,14 @@ module TrafficSpy
           payload.browser
         end
         @browsers = browsers.sort_by {|browser, payloads| -payloads.count}
+        resolutions = @payloads.group_by do |payload|
+          payload.resolution
+        end
+        @resolutions = resolutions.sort_by {|resoultion, payloads| -payloads.count}
+        o_systems = @payloads.group_by do |payload|
+          payload.os
+        end
+        @o_systems = o_systems.sort_by {|os, payloads| -payloads.count}
         urls = @source.urls
         @requested_urls = urls.sort_by { |url| -url.requests }
         @response_urls = urls.sort_by { |url| -url.avg_response_time }
