@@ -35,7 +35,9 @@ module TrafficSpy
     end
 
     def payloads
-      @payloads ||= Payload.find_all_by_attribute("url_id", id, { order: :responded_in })
+      @payloads ||= Payload.find_all_by_attribute("url_id",
+                                                  id,
+                                                  { order: :responded_in })
     end
 
     def avg_response_time

@@ -66,11 +66,14 @@ module TrafficSpy
         @source = Source.find_by_identifier(identifier)
         if Event.exists?("name", params[:event_name])
           @event = Event.find_by_attribute("name", event_name)
-          @payloads = @event.payloads.group_by { |payload| payload.requested_at.hour }
+          @payloads = @event.payloads.group_by do
+            |payload| payload.requested_at.hour
+          end
           erb 'events/show'.to_sym
         else
           @message = "Event not defined"
-          @link = {:text => "Events Index", :link => "/sources/#{@source.identifier}/events"}
+          @link = {:text => "Events Index",
+                   :link => "/sources/#{@source.identifier}/events"}
           erb :invalid_info
         end
       else
