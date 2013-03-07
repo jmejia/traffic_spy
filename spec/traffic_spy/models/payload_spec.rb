@@ -9,7 +9,7 @@ require 'spec_helper'
 
       let (:sample_input) do
         {
-          "url" => "http://jumpstartlab.com/blog",
+          "url_id" => "http://jumpstartlab.com/blog",
           "requestedAt" => "2013-02-16 21:38:28 -0700",
           "respondedIn" => 37,
           "referredBy" => "http://jumpstartlab.com",
@@ -34,7 +34,7 @@ require 'spec_helper'
       describe "Payload.save" do
         it "takes the information in from the JSON parse and saves it to a larger payload object" do
           payload = described_class.save("jumpstartlab", sample_input)
-          expect(payload.os).to eq(sample_site[:os])
+          expect(payload[:os]).to eq(sample_site[:os])
         end
       end
 
@@ -44,13 +44,13 @@ require 'spec_helper'
         end
 
         it 'allows creation of a new, unsaved instance' do
-          @payload.id.should be_nil
+          @payload.requested_at.should be_nil
           @payload.should be_new_record
         end
 
         it 'persists a record to the database and populates the id' do
           @payload.save
-          @payload.id.should_not be_nil
+          @payload.requested_at.should_not be_nil
           @payload.should_not be_new_record
         end
       end

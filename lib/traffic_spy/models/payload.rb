@@ -3,7 +3,7 @@ module TrafficSpy
 
     extend Finder
 
-    attr_reader :url_id, :event_id, :os, :browser, :resolution, :responded_in, :url, :event
+    attr_reader :url_id, :source_id, :event_id, :os, :browser, :resolution, :request_type, :responded_in, :referrer_id, :url, :event, :requested_at, :ip
 
     def initialize(input)
       @url_id            = input[:url_id]
@@ -13,7 +13,6 @@ module TrafficSpy
       @referrer_id       = input[:referred_by]
       @request_type      = input[:request_type]
       @parameters        = input[:parameters]
-
       @event_id          = input[:event_id]
       @os                = input[:os]
       @browser           = input[:browser]
@@ -67,7 +66,7 @@ module TrafficSpy
     end
 
     def new_record?
-      id.nil?
+      requested_at.nil?
     end
 
     def url
