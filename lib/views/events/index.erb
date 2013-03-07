@@ -1,0 +1,18 @@
+<h3><%= @source.identifier %> Events</h3>
+
+<% if @events.count < 1 %>
+  <h1>No Events Have Been Defined</h1>
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Received Count</th>
+    </tr>
+    <% @events.each do |event| %>
+      <tr>
+        <td><a href="events/<%= event.name %>"><%= event.name %></td>
+        <td><%= event.received_count %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

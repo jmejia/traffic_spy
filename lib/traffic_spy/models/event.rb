@@ -24,6 +24,10 @@ module TrafficSpy
       @_searchables = ["id", "name", "source_id", "received_count"]
     end
 
+    def payloads
+      @payloads ||= Payload.find_all_by_attribute("event_id", id, {order: Sequel.desc(:requested_at)})
+    end
+
     def self.find_or_save(attr, val, source_id)
       if exists?(attr, val)
         event = find_by_attribute(attr, val)

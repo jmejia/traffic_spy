@@ -7,7 +7,7 @@
   </tr>
   <% @requested_urls.each do |url| %>
     <tr>
-      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
       <td><%= url.requests %></td>
     </tr>
   <%end%>
@@ -17,11 +17,11 @@
 <table class="table">
   <tr>
     <th>URL</th>
-    <th>Requests</th>
+    <th>Average Response Time</th>
   </tr>
   <% @response_urls.each do |url| %>
     <tr>
-      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
       <td><%= url.avg_response_time %></td>
     </tr>
   <%end%>
@@ -34,17 +34,15 @@
     <th>Operating System</th>
     <th>Browser</th>
     <th>Screen Res.</th>
-    <th>Response Time</th>
     <th>Event</th>
   </tr>
   <% @payloads.each do |payload| %>
     <tr>
-      <td><a href="urls/<%= payload.url.path %>"><%= payload.url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= payload.url.path %>"><%= payload.url.path %></a></td>
       <td><%= payload.os %></td>
       <td><%= payload.browser %></td>
       <td><%= payload.resolution %></td>
-      <td><%= payload.responded_in %></td>
-      <td><%= payload.event.name %></td>
+      <td><a href="<%= @source.identifier %>/events/<%= payload.event.name %>"><%= payload.event.name %></a></td>
     </tr>
   <% end %>
 </table>

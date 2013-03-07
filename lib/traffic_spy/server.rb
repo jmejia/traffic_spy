@@ -46,6 +46,37 @@ module TrafficSpy
       end
     end
 
+    get '/sources/:identifier/events/?' do
+      identifier = params[:identifier]
+      if Source.exists?("identifier", identifier)
+        @source = Source.find_by_identifier(identifier)
+        events = @source.events
+        @events = events.sort_by { |event| -event.received_count }
+        erb 'events/index'.to_sym
+      else
+        body "Whoa, buddy... That's **NOT** a valid Identifier"
+      end
+    end
+
+    get '/sources/:identifier/events/:event_name/?' do
+      identifier = params[:identifier]
+      event_name = params[:event_name]
+      if Source.exists?("identifier", identifier)
+        @source = Source.find_by_identifier(identifier)
+        if Event.exists?("name", params[:event_name])
+          @event = Event.find_by_attribute("name", event_name)
+          @payloads = @event.payloads.group_by { |payload| payload.requested_at.hour }
+          erb 'events/show'.to_sym
+        else
+          @message = "Event not defined"
+          @link = {:text => "Events Index", :link => "/sources/#{@source.identifier}/events"}
+          erb :invalid_info
+        end
+      else
+        body "Whoa, buddy... That's **NOT** a valid Identifier"
+      end
+    end
+
     post '/sources/:identifier/data' do
       if Source.exists?("identifier", params[:identifier])
         data = JSON.parse(params[:payload])

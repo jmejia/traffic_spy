@@ -1,0 +1,26 @@
+<h3>Event Requests For: <%= @event.name %></h3>
+<% @payloads.each do |hour, payloads| %>
+  <h4>Hour <%= hour %></h4>
+  <table class="table">
+  <tr>
+    <th>URL</th>
+    <th>Operating System</th>
+    <th>Browser</th>
+    <th>Screen Res.</th>
+    <th>Response Time</th>
+    <th>Requested At</th>
+    <th>Event</th>
+  </tr>
+  <% payloads.each do |payload| %>
+    <tr>
+      <td><%= payload.url.path%></td>
+      <td><%= payload.os %></td>
+      <td><%= payload.browser %></td>
+      <td><%= payload.resolution %></td>
+      <td><%= payload.responded_in %></td>
+      <td><%= payload.requested_at %></td>
+      <td><%= payload.event.name %></td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
