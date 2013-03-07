@@ -80,7 +80,7 @@ module TrafficSpy
           @event = Event.find_by_attribute("name", event_name)
           @payloads = @event.payloads.group_by do
             |payload| payload.requested_at.hour
-          end
+          end.sort
           erb 'events/show'.to_sym
         else
           @message = "Event not defined"
