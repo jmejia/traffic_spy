@@ -11,10 +11,6 @@ module TrafficSpy
       matches.collect { |match| new(match) }
     end
 
-    #def find_all_by_attribute(attr, val)
-    #  matches = table.where(attr.to_sym => val).to_a
-    #  matches.collect { |match| new(match) }
-    #end
     def exists?(attr, val)
       table.where(attr.to_sym => val).to_a.count > 0
     end

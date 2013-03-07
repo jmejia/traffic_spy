@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in traffic_spy.gemspec
 gemspec
+gem 'cane'
+gem 'reek'
 
 group :development do
   gem 'sqlite3'

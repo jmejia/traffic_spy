@@ -45,6 +45,7 @@ module TrafficSpy
         :resolution => "#{width}x#{height}",
         :ip => params["ip"]
       )
+      self
     end
 
     def save

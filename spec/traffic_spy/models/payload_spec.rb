@@ -3,13 +3,10 @@ require 'spec_helper'
   describe TrafficSpy::Payload do 
 
     context "Loading and Parsing" do
-      before do
-        TrafficSpy::Source.new(id: 1, identifier: 'jumpstartlab').save
-      end
 
       let (:sample_input) do
         {
-          "url_id" => "http://jumpstartlab.com/blog",
+          "url" => "http://jumpstartlab.com/blog",
           "requestedAt" => "2013-02-16 21:38:28 -0700",
           "respondedIn" => 37,
           "referredBy" => "http://jumpstartlab.com",
@@ -28,32 +25,22 @@ require 'spec_helper'
           :responded_in => "42", :request_type => "GET", :parameters => "[]", :event_id => 3, :browser => "Chrome",
           :os => "Intel Mac OS X 10_8_2", :resolution => "1920 x 1280", :ip => "63.29.38.211", :created_at => Time.now} 
       end
-      let (:identifier) {"identifier"}
 
-      
-      describe "Payload.save" do
-        it "takes the information in from the JSON parse and saves it to a larger payload object" do
-          payload = described_class.save("jumpstartlab", sample_input)
-          expect(payload[:os]).to eq(sample_site[:os])
+      describe ".new" do
+        it 'allows creation of a new instance' do
+          payload = described_class.new(sample_site)
+          expect(payload.requested_at).to eq("2013-02-17 12:34:43 -0700")
         end
       end
 
       describe 'payload.save (instance method)' do
-        before do
-          @payload = described_class.new(url_id: 1)
-        end
-
-        it 'allows creation of a new, unsaved instance' do
-          @payload.requested_at.should be_nil
-          @payload.should be_new_record
-        end
-
         it 'persists a record to the database and populates the id' do
-          @payload.save
-          @payload.requested_at.should_not be_nil
-          @payload.should_not be_new_record
+          count = described_class.table.count
+          described_class.save("jumpstartlab", sample_input)
+          expect(described_class.table.count).to eq(count + 1)
         end
       end
+
     end
   end
 
