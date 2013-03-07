@@ -1,96 +1,50 @@
 <h2><%= @source.identifier.capitalize %> Stats</h2>
-<<<<<<< HEAD
-<h3>URL Breakdown</h3>
-=======
+
 <h3>URLs By Requests</h3>
->>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
 <table class="table">
   <tr>
     <th>URL</th>
     <th>Requests</th>
-<<<<<<< HEAD
-    <th>Avg. Response Time</th>
-  </tr>
-  <% @urls.each do |url| %>
-    <tr>
-      <td><%= url.url %></td>
-      <td><%= url.requests %></td>
-      <td>###</td>
-=======
   </tr>
   <% @requested_urls.each do |url| %>
     <tr>
-      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
       <td><%= url.requests %></td>
->>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
     </tr>
   <%end%>
 </table>
 
-<<<<<<< HEAD
-*most to least requested urls(takes in url)
-
-<h3>Request Breakdown</h3>
-=======
 <h3>URLs By Average Response Time</h3>
 <table class="table">
   <tr>
     <th>URL</th>
-    <th>Requests</th>
+    <th>Average Response Time</th>
   </tr>
   <% @response_urls.each do |url| %>
     <tr>
-      <td><a href="urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
       <td><%= url.avg_response_time %></td>
     </tr>
   <%end%>
 </table>
 
 <h3>All Requests</h3>
->>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
 <table class="table">
   <tr>
     <th>URL</th>
     <th>Operating System</th>
     <th>Browser</th>
     <th>Screen Res.</th>
-    <th>Response Time</th>
-<<<<<<< HEAD
-  </tr>
-  <% @payloads.each do |payload| %>
-    <tr>
-      <td><%= payload.url.url %></td>
-=======
     <th>Event</th>
   </tr>
   <% @payloads.each do |payload| %>
     <tr>
-      <td><a href="urls/<%= payload.url.path %>"><%= payload.url.path%></a></td>
->>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0
+
+      <td><a href="<%= @source.identifier %>/urls/<%= payload.url.path %>"><%= payload.url.path %></a></td>
       <td><%= payload.os %></td>
       <td><%= payload.browser %></td>
       <td><%= payload.resolution %></td>
-      <td><%= payload.responded_in %></td>
-<<<<<<< HEAD
+      <td><a href="<%= @source.identifier %>/events/<%= payload.event.name %>"><%= payload.event.name %></a></td>
     </tr>
   <% end %>
 </table>
-
-*Web browser breakdown across all requests
-  #shows which request used which browser(take in userAgent)
-<h3>OS breakdown across all requests</h3>
-  #takes in OS types for all requests(takes in userAgent)
-<h3>Screen Resolution across all requests</h3>
-  #takes in resolution data(heightxwidth) from all requests
-<h3>Longest, average response time per URL to shortest, average response time per URL</h3>
-  #displays longest to shortest average response time per URL
-<h3>Hyperlinks of each URL</h3>
-  #Displays hyperlinks of each url to view url specific data
-<h3>Hyperlink to view event data</h3>
-  #Displays hyperlink to view aggregate event data
-=======
-      <td><%= payload.event.name %></td>
-    </tr>
-  <% end %>
-</table>
->>>>>>> 9573b4ff0629891e0725ae9350bf1b07116276b0

@@ -15,6 +15,9 @@ module TrafficSpy
     #  matches = table.where(attr.to_sym => val).to_a
     #  matches.collect { |match| new(match) }
     #end
+    def exists?(attr, val)
+      table.where(attr.to_sym => val).to_a.count > 0
+    end
 
     def find_all_by_attribute(attr, val, options={})
       matches = table.where(attr.to_sym => val).order(options[:order] || :id)

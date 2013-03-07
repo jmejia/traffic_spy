@@ -22,6 +22,10 @@ module TrafficSpy
       Payload.find_all_by_attribute("source_id", id, { order: :responded_in })
     end
 
+    def events
+      @events ||= Event.find_all_by_attribute("source_id", id)
+    end
+
     def exists?
       Source.table.where(:identifier => identifier).to_a.count > 0
     end
