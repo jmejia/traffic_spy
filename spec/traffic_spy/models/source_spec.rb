@@ -6,7 +6,7 @@ module TrafficSpy
     context "Creating" do
       let (:subject) { described_class }
       let (:sample_site) { {:identifier => "jumpstartlab", :rootUrl => "http://jumpstartlab.com"} }
-
+      
       describe ".new" do
         it "can initialize source" do
           source = subject.new(sample_site)
@@ -30,6 +30,11 @@ module TrafficSpy
         end
       end
 
+    end
+
+
+    it 'should return nil if record does not exist' do
+      described_class.find_by_identifier('asdfasdf').should be_nil
     end
 
 
