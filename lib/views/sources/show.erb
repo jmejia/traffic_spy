@@ -1,4 +1,5 @@
 <h2><%= @source.identifier.capitalize %> Stats</h2>
+
 <h3>URLs By Requests</h3>
 <table class="table">
   <tr>
@@ -38,6 +39,7 @@
   </tr>
   <% @payloads.each do |payload| %>
     <tr>
+
       <td><a href="<%= @source.identifier %>/urls/<%= payload.url.path %>"><%= payload.url.path %></a></td>
       <td><%= payload.os %></td>
       <td><%= payload.browser %></td>

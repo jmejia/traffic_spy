@@ -2,6 +2,7 @@ module TrafficSpy
   class Url
 
     extend Finder
+
     attr_reader :id, :full_url, :requests, :path, :source_id
 
     def initialize(input)

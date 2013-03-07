@@ -14,7 +14,7 @@ module TrafficSpy
     def update_received_count
       count = received_count + 1
       Event.table.where(:id => id).update(:received_count => count)
-    end
+    end   
 
     def self.save(name, source_id)
       table.insert(:name => name, :source_id => source_id, :received_count => 1)
