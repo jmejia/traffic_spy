@@ -18,6 +18,10 @@ module TrafficSpy
       if Source.exists?("identifier", identifier)
         @source = Source.find_by_identifier(identifier)
         @payloads = @source.payloads.reverse
+        browsers = @payloads.group_by do |payload|
+          payload.browser
+        end
+        @browsers = browsers.sort_by {|browser, payloads| -payloads.count}
         urls = @source.urls
         @requested_urls = urls.sort_by { |url| -url.requests }
         @response_urls = urls.sort_by { |url| -url.avg_response_time }
