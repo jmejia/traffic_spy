@@ -17,4 +17,10 @@ end
 
 group :evaluations do
   # THIS SPACE RESERVED FOR EVALUATIONS
+<<<<<<< HEAD
+=======
+  gem 'cane'
+  gem 'reek'
+  gem 'rake'
+>>>>>>> 76e73cde42f93a2bc8727d76dd6f488a0d7c9f41
 end

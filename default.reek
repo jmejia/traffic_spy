@@ -1,7 +1,11 @@
 ---
 
 LongMethod:
+<<<<<<< HEAD
   max_statements: 10
+=======
+  max_statements: 8
+>>>>>>> 76e73cde42f93a2bc8727d76dd6f488a0d7c9f41
 FeatureEnvy:
   enabled: false
 IrresponsibleModule:
