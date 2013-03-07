@@ -8,7 +8,7 @@
   </tr>
   <% @requested_urls.each do |url| %>
     <tr>
-      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>"><%= url.path%></a></td>
+      <td><a href="<%= @source.identifier %>/urls/<%= url.path %>">/<%= url.path%></a></td>
       <td><%= url.requests %></td>
     </tr>
   <%end%>
