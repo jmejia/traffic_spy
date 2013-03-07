@@ -24,6 +24,7 @@ module TrafficSpy
 
         erb 'sources/show'.to_sym
       else
+        response 404
         body "Identifier does not exist"
       end
     end
@@ -80,8 +81,13 @@ module TrafficSpy
     post '/sources/:identifier/data' do
       if Source.exists?("identifier", params[:identifier])
         data = JSON.parse(params[:payload])
-        Payload.save(params[:identifier], data)
-        status 200
+        if Payload.exists?(data)
+          body "Duplicate payload"
+          status 403
+        else
+          Payload.save(params[:identifier], data)
+          status 200
+        end
       else
         body "Identifier does not exist"
         status 400

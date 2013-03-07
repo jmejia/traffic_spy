@@ -48,23 +48,23 @@ module TrafficSpy
       self
     end
 
-    def save
-      @id = self.class.table.insert(
-        :url_id => url_id,
-        :source_id => source_id,
-        :requested_at => requested_at,
-        :responded_in => responded_in,
-        :referrer_id => referrer_id,
-        :request_type => request_type,
-        :event_id => event_id,
-        :browser => browser,
-        :os => os,
-        :resolution => resolution,
-        :ip => ip,
-        :created_at => Time.now
-      )
-      self
-    end
+    #def save
+    #  @id = self.class.table.insert(
+    #    :url_id => url_id,
+    #    :source_id => source_id,
+    #    :requested_at => requested_at,
+    #    :responded_in => responded_in,
+    #    :referrer_id => referrer_id,
+    #    :request_type => request_type,
+    #    :event_id => event_id,
+    #    :browser => browser,
+    #    :os => os,
+    #    :resolution => resolution,
+    #    :ip => ip,
+    #    :created_at => Time.now
+    #  )
+    #  self
+    #end
 
     def new_record?
       requested_at.nil?
@@ -74,8 +74,16 @@ module TrafficSpy
       @url = Url.find_by_attribute("id", url_id)
     end
 
-    def url
-      @url = Url.find_by_attribute("id", url_id)
+    def self.exists?(params)
+      if find_all_by_attribute("requested_at", params["requestedAt"]).count > 0
+        if Url.find_all_by_attribute("full_url", params["url"]).count > 0
+          true
+        else
+          false
+        end
+      else
+        false
+      end
     end
 
     def event

@@ -15,7 +15,7 @@ module TrafficSpy
     end
 
     def missing_attributes?
-      [identifier, root_url].include?("")#|| [identifier, root_url].include?(nil)
+      [identifier, root_url].include?("") || [identifier, root_url].include?(nil)
     end
 
     def payloads
